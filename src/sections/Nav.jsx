@@ -1,0 +1,191 @@
+import { useState, useEffect, useRef, useCallback } from 'react';
+import { AnimatePresence, motion, useReducedMotion } from 'framer-motion';
+import { translations } from '../i18n';
+import { containerClasses } from '../styles';
+
+// Duration of the mobile dropdown collapse. Shared between the exit transition
+// and handleNavClick, which has to wait it out before scrolling.
+const MOBILE_MENU_EXIT_MS = 200;
+
+const Nav = ({ articleSlug, onBack, homeUrl = '/' }) => {
+  const t = translations;
+  const nav = t.nav;
+  const [mobileOpen, setMobileOpen] = useState(false);
+  const [hidden, setHidden] = useState(false);
+  const [activeSection, setActiveSection] = useState('');
+  const mobileOpenRef = useRef(mobileOpen);
+  const prefersReducedMotion = useReducedMotion();
+
+  useEffect(() => {
+    mobileOpenRef.current = mobileOpen;
+  }, [mobileOpen]);
+
+  // Hide on scroll down, show on scroll up
+  useEffect(() => {
+    let lastY = window.scrollY;
+    const onScroll = () => {
+      const y = window.scrollY;
+      setHidden(y > 100 && y > lastY);
+      lastY = y;
+      if (mobileOpenRef.current) setMobileOpen(false);
+    };
+    window.addEventListener('scroll', onScroll, { passive: true });
+    return () => window.removeEventListener('scroll', onScroll);
+  }, []);
+
+  // Track active section via IntersectionObserver (skip in article mode)
+  useEffect(() => {
+    if (articleSlug) return;
+    const ids = ['services', 'projects', 'faq', 'about', 'articles', 'contact'];
+    const observer = new IntersectionObserver(
+      (entries) => {
+        for (const entry of entries) {
+          if (entry.isIntersecting) {
+            setActiveSection(entry.target.id);
+          }
+        }
+      },
+      { rootMargin: '-30% 0px -60% 0px' },
+    );
+
+    ids.forEach((id) => {
+      const el = document.getElementById(id);
+      if (el) observer.observe(el);
+    });
+
+    return () => observer.disconnect();
+  }, [articleSlug]);
+
+  const navLinks = [
+    { id: 'services', label: nav.services },
+    { id: 'projects', label: nav.projects },
+    { id: 'faq', label: nav.faq },
+    { id: 'about', label: nav.about },
+    { id: 'articles', label: nav.articles },
+    { id: 'contact', label: nav.contact },
+  ];
+
+  const handleNavClick = useCallback((e, id) => {
+    e.preventDefault();
+    const target = document.getElementById(id);
+    if (!target) return;
+
+    // Collapsing the mobile dropdown aborts a smooth scroll that is already in
+    // flight - it dies a few dozen pixels in. So when the menu is open, close it
+    // first and only start scrolling once the exit animation is done.
+    if (mobileOpenRef.current) {
+      setMobileOpen(false);
+      window.setTimeout(() => target.scrollIntoView({ behavior: 'smooth' }), MOBILE_MENU_EXIT_MS + 40);
+      return;
+    }
+
+    target.scrollIntoView({ behavior: 'smooth' });
+  }, []);
+
+  return (
+    <motion.header
+      initial={prefersReducedMotion ? false : { y: -80 }}
+      animate={{ y: hidden ? -80 : 0 }}
+      transition={prefersReducedMotion ? { duration: 0 } : { duration: 0.3, ease: 'easeInOut' }}
+      className="fixed top-0 left-0 right-0 z-50 bg-bg/60 backdrop-blur-2xl backdrop-saturate-150 border-b border-white/[0.06] shadow-[0_1px_12px_rgba(0,0,0,0.4)]"
+    >
+      <div className={`${containerClasses} flex items-center justify-between h-20`}>
+        {/* Brand: avatar + name + role */}
+        <a
+          href={homeUrl}
+          className="flex items-center gap-3 min-w-0 no-underline text-inherit hover:opacity-90 transition-opacity max-[480px]:gap-2.5"
+        >
+          <img
+            src="/chirag-gujarati.webp"
+            alt="Chirag Gujarati"
+            width="747"
+            height="1024"
+            loading="eager"
+            className="h-9 w-9 shrink-0 rounded-full object-cover object-[center_15%] ring-2 ring-accent/60 ring-offset-2 ring-offset-bg max-[480px]:h-8 max-[480px]:w-8 max-[480px]:ring-1 max-[480px]:ring-offset-1"
+          />
+          <span className="flex flex-col min-w-0 leading-tight">
+            <span className="text-base font-bold text-text truncate max-[480px]:text-sm">Chirag Gujarati</span>
+            <span className="text-[0.65rem] font-medium uppercase tracking-[0.18em] text-muted truncate max-[600px]:tracking-[0.12em] max-[380px]:hidden">
+              Mobile App Developer
+            </span>
+          </span>
+        </a>
+
+        {articleSlug ? (
+          /* Article mode: back link */
+          <nav className="flex items-center gap-6">
+            <a
+              href={homeUrl}
+              onClick={onBack}
+              className="text-sm text-muted hover:text-accent transition-colors duration-200 flex items-center gap-1.5"
+            >
+              <span aria-hidden="true">&larr;</span> Back
+            </a>
+          </nav>
+        ) : (
+          <>
+            {/* Desktop nav */}
+            <nav className="hidden md:flex items-center gap-8" aria-label="Main navigation">
+              {navLinks.map(({ id, label }) => (
+                <a
+                  key={id}
+                  href={`#${id}`}
+                  onClick={(e) => handleNavClick(e, id)}
+                  className={`text-sm font-medium transition-colors duration-200 ${
+                    activeSection === id ? 'text-text' : 'text-muted hover:text-text'
+                  }`}
+                >
+                  {label}
+                </a>
+              ))}
+
+              {/* Language toggle */}
+              <div className="ml-2"></div>
+            </nav>
+
+            {/* Mobile hamburger */}
+            <button
+              className="md:hidden flex flex-col gap-1.5 p-2 bg-transparent border-0 cursor-pointer"
+              onClick={() => setMobileOpen(!mobileOpen)}
+              aria-label="Menu"
+              aria-expanded={mobileOpen}
+            >
+              <span className={`hamburger-line ${mobileOpen ? 'translate-y-[4px] rotate-45' : ''}`} />
+              <span className={`hamburger-line ${mobileOpen ? 'opacity-0' : ''}`} />
+              <span className={`hamburger-line ${mobileOpen ? '-translate-y-[4px] -rotate-45' : ''}`} />
+            </button>
+          </>
+        )}
+      </div>
+
+      {/* Mobile dropdown */}
+      <AnimatePresence>
+        {mobileOpen && !articleSlug && (
+          <motion.nav
+            initial={prefersReducedMotion ? false : { opacity: 0, height: 0 }}
+            animate={{ opacity: 1, height: 'auto' }}
+            exit={prefersReducedMotion ? { display: 'none' } : { opacity: 0, height: 0 }}
+            transition={prefersReducedMotion ? { duration: 0 } : { duration: MOBILE_MENU_EXIT_MS / 1000 }}
+            className="md:hidden bg-bg/95 backdrop-blur-xl border-t border-line/50 overflow-hidden"
+            aria-label="Main navigation"
+          >
+            <div className={`${containerClasses} py-4 flex flex-col gap-3`}>
+              {navLinks.map(({ id, label }) => (
+                <a
+                  key={id}
+                  href={`#${id}`}
+                  onClick={(e) => handleNavClick(e, id)}
+                  className={`text-base py-2 font-medium ${activeSection === id ? 'text-accent' : 'text-muted'}`}
+                >
+                  {label}
+                </a>
+              ))}
+            </div>
+          </motion.nav>
+        )}
+      </AnimatePresence>
+    </motion.header>
+  );
+};
+
+export default Nav;
