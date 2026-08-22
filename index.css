@@ -1,0 +1,36 @@
+@import 'tailwindcss';
+
+@theme {
+  --color-bg: #050505;
+  --color-text: #f6f6f6;
+  --color-muted: #b5b5b5;
+  --color-line: rgba(255, 255, 255, 0.06);
+  --color-accent: #ff8b5f;
+  --color-accent-dim: rgba(255, 139, 95, 0.15);
+  --color-surface: rgba(255, 255, 255, 0.03);
+  --color-surface-hover: rgba(255, 255, 255, 0.05);
+  --font-sans: 'Space Grotesk', system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+}
+
+html {
+  scroll-behavior: smooth;
+  color-scheme: dark;
+  scroll-padding-top: 5rem;
+}
+
+body {
+  @apply bg-bg text-text font-sans m-0 min-h-screen;
+}
+
+a {
+  @apply text-text no-underline transition-colors duration-300;
+}
+
+a:hover {
+  @apply text-accent;
+}
+
+/* Mobile menu button bars (Nav.jsx) */
+.hamburger-line {
+  @apply block w-[22px] h-[2px] bg-text rounded-full transition-transform duration-300;
+}

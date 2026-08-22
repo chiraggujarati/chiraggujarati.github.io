@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://chiraggujarati.github.io/sitemap.xml
