@@ -32,7 +32,9 @@ const Services = () => {
             <ScrollReveal key={category.title} delay={i * 0.08}>
               <Card className="p-8 h-full hover:bg-surface-hover hover:border-accent/40 hover:-translate-y-1 group">
                 <div className="w-12 h-12 flex items-center justify-center rounded-xl bg-accent-dim text-accent mb-6 group-hover:scale-110 transition-transform duration-300">
-                  <Icon />
+                  {/* Sized explicitly: an unsized SVG stretches to fill the flex
+                      parent, which left the glyph touching the tile's edges. */}
+                  <Icon className="h-6 w-6" />
                 </div>
                 <h3 className="text-xl font-semibold mb-2">{category.title}</h3>
                 {category.description && <p className="text-sm text-muted mb-5">{category.description}</p>}

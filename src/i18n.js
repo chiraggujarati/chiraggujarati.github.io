@@ -33,8 +33,7 @@ export const translations = {
       title: 'Where I have worked',
       items: [
         {
-          initial: 'S',
-          color: '#5C6BC0',
+          logo: '/logo-syncly.webp',
           company: 'Syncly',
           role: 'Senior iOS App Developer',
           period: 'Feb 2024 - Present',
@@ -42,16 +41,14 @@ export const translations = {
           text: 'Lookupp, Silver Stream, DamageID, Fluid Focus, TherapyAI and DreamTime - ScreenTime API work, an Objective-C to Swift migration, and SwiftUI interface rebuilds.',
         },
         {
-          initial: 'S',
-          color: '#14B8A6',
+          logo: '/logo-sculptsoft.webp',
           company: 'SculptSoft',
           role: 'iOS Developer',
           period: 'Nov 2022 - Jan 2024',
           text: 'Skandika, a German fitness platform pairing over Bluetooth with gym equipment in six languages, and Virtual Site Inspections, an offline-first property inspection tool.',
         },
         {
-          initial: 'C',
-          color: '#F97316',
+          logo: '/logo-codonnier.webp',
           company: 'Codonnier Solutions',
           role: 'Full Stack Developer',
           period: 'Apr 2021 - Nov 2022',
@@ -71,17 +68,26 @@ export const translations = {
     stats: [
       { value: '5+', label: 'Years building mobile apps' },
       { value: '30+', label: 'Apps shipped to the App Store' },
-      { value: 'iOS + RN', label: 'Native and cross-platform' },
+      { value: 'iOS + React Native', label: 'Native and cross-platform' },
     ],
     toolbox: {
-      title: 'Toolbox',
+      title: 'Tech & Toolbox',
+      // Platforms and languages first, then the day-to-day tools - the order
+      // the list is read in.
       primary: [
         { icon: 'ios', label: 'iOS' },
+        { icon: 'xcode', label: 'Xcode' },
         { icon: 'reactnative', label: 'React Native' },
+        { icon: 'python', label: 'Python' },
         { icon: 'firebase', label: 'Firebase' },
         { icon: 'supabase', label: 'Supabase' },
-        { icon: 'python', label: 'Python' },
         { icon: 'aws', label: 'AWS' },
+        { icon: 'vscode', label: 'VS Code' },
+        { icon: 'postman', label: 'Postman' },
+        { icon: 'figma', label: 'Figma' },
+        { icon: 'jira', label: 'Jira' },
+        { icon: 'trello', label: 'Trello' },
+        { icon: 'notion', label: 'Notion' },
       ],
       secondary: [
         'Swift',
@@ -148,7 +154,7 @@ export const translations = {
         href: 'https://apps.apple.com/cz/app/skandika-fitness/id6473820107',
       },
       {
-        icon: 'lock',
+        icon: 'screentime',
         tag: 'Screen time, actually enforced',
         client: 'Lookupp',
         text: "Built on Apple's ScreenTime API to lock distracting apps and pay users back in points for staying focused. Getting that framework to behave reliably was most of the work.",
@@ -160,7 +166,7 @@ export const translations = {
         href: 'https://apps.apple.com/in/app/lookupp/id1666548055',
       },
       {
-        icon: 'film',
+        icon: 'redesign',
         tag: 'Redesign and rescue',
         client: 'Silver Stream',
         text: 'A 1,500-title catalogue of classic film and television. I redesigned the interface and fixed the performance problems that made a library that size stutter.',
@@ -244,6 +250,78 @@ export const translations = {
           'Realtime sync and offline-first data',
           'AI features and agent workflows inside the app',
         ],
+      },
+    ],
+  },
+  clientApps: {
+    title: 'Client projects',
+    subtitle: 'Apps built and shipped for clients - every one of these is live on a store today.',
+    appStoreLabel: 'Download on the App Store',
+    googlePlayLabel: 'Get it on Google Play',
+    items: [
+      {
+        name: 'Lookupp',
+        icon: '/app-lookupp.webp',
+        category: 'Productivity',
+        description:
+          'Start a phone-free zone with the people around you and earn real rewards for staying off the screen.',
+        appStore: 'https://apps.apple.com/us/app/lookupp/id1666548055',
+      },
+      {
+        name: 'Silver Stream',
+        icon: '/app-silver-stream.webp',
+        category: 'Entertainment',
+        description:
+          'A streaming library of more than 1,500 restored classic films, TV shows and serials from the golden age.',
+        appStore: 'https://apps.apple.com/us/app/silver-stream/id1451791823',
+      },
+      {
+        name: 'Fluid Focus',
+        icon: '/app-fluid-focus.webp',
+        category: 'Productivity',
+        description:
+          'Screen time limits that turn into rewards - block the distracting apps for a session and earn your way back.',
+        appStore: 'https://apps.apple.com/us/app/fluid-focus-app/id6477136445',
+        googlePlay: 'https://play.google.com/store/apps/details?id=com.fluidfocusltd.fluidfocus',
+      },
+      {
+        name: 'PDF Scanner: Document Camera',
+        icon: '/app-pdf-scanner.webp',
+        category: 'Productivity',
+        description:
+          'Scan anything into a clean, sharp PDF, then summarise, question or sign it - all on device with Apple Intelligence.',
+        appStore: 'https://apps.apple.com/us/app/pdf-scanner-document-camera/id6654918235',
+      },
+      {
+        name: 'DAMAGE iD',
+        icon: '/app-damage-id.webp',
+        category: 'Business',
+        description:
+          'Photo and video vehicle inspection for rental fleets - damage recorded and proven before and after every trip.',
+        appStore: 'https://apps.apple.com/us/app/damage-id/id1024284443',
+      },
+      {
+        name: 'Skandika Fitness',
+        icon: '/app-skandika.webp',
+        category: 'Health & Fitness',
+        description:
+          'Bluetooth companion for Skandika ergometers - live workout metrics and guided sessions, in six languages.',
+        appStore: 'https://apps.apple.com/de/app/skandika-fitness/id6473820107',
+      },
+      {
+        name: 'AviMaps',
+        icon: '/app-avimaps.webp',
+        category: 'Lifestyle',
+        description: 'Log every bird, wildlife and plant sighting, put it on the map and share the find with friends.',
+        appStore: 'https://apps.apple.com/us/app/avimaps/id6759719027',
+        googlePlay: 'https://play.google.com/store/apps/details?id=com.avimaps.myapp',
+      },
+      {
+        name: 'DreamTime Stories & Sounds',
+        icon: '/app-dreamtime.webp',
+        category: 'Health & Fitness',
+        description: 'Bedtime stories, meditations and sleep sounds that help children settle and fall asleep faster.',
+        appStore: 'https://apps.apple.com/us/app/dreamtime-stories-sounds/id6504247314',
       },
     ],
   },
@@ -354,12 +432,35 @@ export const translations = {
   },
   testimonials: {
     title: 'What clients say',
-    subtitle: 'Verified reviews from client work delivered through Upwork.',
+    subtitle: 'Verified reviews from client after work delivered.',
     pendingLabel: 'Awaiting reply',
     verifiedLabel: 'Verified',
     sourceLabel: 'Upwork',
+    appStoreLabel: 'Download on the App Store',
     ctaLabel: 'See my Upwork profile',
     ctaHref: 'https://www.upwork.com/freelancers/~017b8533e11d1e6002?mp_source=share',
+    // The featured video review. `uploadDate` and `durationISO` are not copy -
+    // they feed the VideoObject JSON-LD in pages/+Head.jsx, which is what makes
+    // the video eligible for a video rich result in search.
+    video: {
+      label: 'Video review',
+      heading: 'Hear it from a client',
+      body: 'Ninety seconds, unscripted: what it was like to build and ship the app together.',
+      name: 'Atiksh B.',
+      role: 'Lookupp - iOS app',
+      date: 'August 2026',
+      videoId: 'rshJIeOqTes',
+      videoTitle: 'Client review of Chirag Gujarati, iOS developer',
+      playLabel: 'Play the video review',
+      duration: '1:34',
+      durationISO: 'PT1M34S',
+      uploadDate: '2026-08-15',
+      poster: '/testimonial-video-poster.webp',
+      posterWidth: 406,
+      posterHeight: 720,
+      watchLabel: 'Watch on YouTube',
+      watchHref: 'https://www.youtube.com/watch?v=rshJIeOqTes',
+    },
     items: [
       {
         quote:
@@ -372,17 +473,26 @@ export const translations = {
       },
       {
         quote:
-          'Chirag is a pleasure to work with. He has worked on several iOS projects for me and has always gone above and beyond to ensure a successful project.',
-        name: 'Health app client',
-        role: 'Endorsed by client',
-        project: 'iOS Developer for a Health App',
-        date: 'Dec 2022 - Oct 2023',
+          'Chirag is the very best. We have worked together for several years and will be starting a new project this week.',
+        name: 'Josh',
+        role: 'Silver Stream',
+        appStoreApp: 'Silver Stream',
+        appStoreHref: 'https://apps.apple.com/us/app/silver-stream/id1451791823',
+        project: 'Interface redesign & performance work',
         rating: 5,
+        verified: true,
       },
       {
-        pending: true,
-        name: 'Atiksh Bhan',
-        project: 'Testimonial request sent',
+        quote:
+          "Chirag has been fantastic to work with! He's extremely responsive, communicates clearly, works incredibly fast, and consistently delivers high-quality work at a very reasonable price. We've worked with him extensively on a major overhaul of our app's backend logic, numerous new features, UI refinements, bug fixes, and much more. What really sets Chirag apart is how much he goes above and beyond. He genuinely cares about the product, proactively identifies things we can improve, suggests new features, and even shares ideas for how we can grow and scale the app. He's extremely flexible, dependable, and always willing to help. On top of all that, he's just a genuinely great guy and a pleasure to work with. I couldn't recommend Chirag more highly!",
+        name: 'Atiksh B.',
+        role: 'Lookupp',
+        appStoreApp: 'Lookupp',
+        appStoreHref: 'https://apps.apple.com/us/app/lookupp/id1666548055',
+        project: 'Backend overhaul, new features & UI refinements',
+        date: 'August 2026',
+        rating: 5,
+        verified: true,
       },
     ],
   },
@@ -449,6 +559,7 @@ export const translations = {
     about: 'About',
     services: 'Services',
     projects: 'Projects',
+    testimonials: 'Testimonials',
     faq: 'FAQ',
     articles: 'Articles',
     contact: 'Contact',

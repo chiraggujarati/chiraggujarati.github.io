@@ -12,6 +12,18 @@ const socialIcons = {
   stackoverflow: StackOverflowIcon,
 };
 
+// Each mark in its own brand colour, so the row is recognisable before the
+// labels are read. GitHub and X have no colour of their own - white is the
+// version of their mark meant for a dark background. Written out as literal
+// classes because Tailwind only sees class names it can find in the source.
+const socialColors = {
+  linkedin: 'text-[#0A66C2]',
+  github: 'text-white',
+  upwork: 'text-[#14A800]',
+  x: 'text-white',
+  stackoverflow: 'text-[#F48024]',
+};
+
 const Contact = () => {
   const t = translations;
   const { title, paragraphs, primary, secondary, socials } = t.contact;
@@ -49,7 +61,7 @@ const Contact = () => {
                     rel="noreferrer"
                     className="inline-flex items-center gap-2 rounded-full border border-text/20 bg-white/[0.02] px-4 py-2 text-sm font-medium text-muted no-underline transition-all duration-300 hover:border-accent/50 hover:text-accent hover:bg-accent/[0.06] max-[480px]:px-3 max-[480px]:text-xs"
                   >
-                    {Icon && <Icon className="h-[1.1em] w-[1.1em] shrink-0" />}
+                    {Icon && <Icon className={`h-[1.1em] w-[1.1em] shrink-0 ${socialColors[icon] ?? ''}`} />}
                     {label}
                   </a>
                 </li>

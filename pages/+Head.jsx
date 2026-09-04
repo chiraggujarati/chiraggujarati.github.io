@@ -1,5 +1,6 @@
 import { usePageContext } from 'vike-react/usePageContext';
 import { pagePath } from '../src/urls.js';
+import { translations } from '../src/i18n.js';
 
 const SITE = 'https://chiraggujarati.github.io';
 
@@ -22,6 +23,11 @@ export default function Head() {
   // exist. It must stay out of the index entirely.
   const isErrorPage =
     pageContext.is404 === true || pageContext.abortStatusCode !== undefined || path.replace(/\/$/, '') === '/404';
+  // The video review only lives on the home page, so its VideoObject markup
+  // belongs there too - repeating it on every page would advertise a video the
+  // rest of the site does not carry.
+  const video = translations.testimonials.video;
+  const showVideoSchema = !isErrorPage && path === '/';
 
   return (
     <>
@@ -117,6 +123,30 @@ export default function Head() {
           }),
         }}
       />
+
+      {showVideoSchema && (
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              '@context': 'https://schema.org',
+              '@type': 'VideoObject',
+              name: video.videoTitle,
+              description: video.body,
+              thumbnailUrl: [`https://i.ytimg.com/vi/${video.videoId}/maxresdefault.jpg`, `${SITE}${video.poster}`],
+              uploadDate: video.uploadDate,
+              duration: video.durationISO,
+              embedUrl: `https://www.youtube-nocookie.com/embed/${video.videoId}`,
+              contentUrl: video.watchHref,
+              publisher: {
+                '@type': 'Organization',
+                name: 'Chirag Gujarati - Mobile App Developer',
+                logo: { '@type': 'ImageObject', url: `${SITE}/icon-512.png` },
+              },
+            }),
+          }}
+        />
+      )}
     </>
   );
 }

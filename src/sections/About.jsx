@@ -2,15 +2,36 @@ import { translations } from '../i18n';
 import { sectionClasses } from '../styles';
 import { SectionHeader } from '../components/ui';
 import { ScrollReveal } from '../components/ScrollReveal';
-import { AwsMark, FirebaseMark, IOSMark, PythonMark, ReactNativeMark, SupabaseMark } from '../techIcons';
+import {
+  AwsMark,
+  FigmaMark,
+  FirebaseMark,
+  IOSMark,
+  JiraMark,
+  NotionMark,
+  PostmanMark,
+  PythonMark,
+  ReactNativeMark,
+  SupabaseMark,
+  TrelloMark,
+  VSCodeMark,
+  XcodeMark,
+} from '../techIcons';
 
 const toolMarks = {
   ios: IOSMark,
+  xcode: XcodeMark,
   reactnative: ReactNativeMark,
+  python: PythonMark,
   firebase: FirebaseMark,
   supabase: SupabaseMark,
-  python: PythonMark,
   aws: AwsMark,
+  vscode: VSCodeMark,
+  postman: PostmanMark,
+  figma: FigmaMark,
+  jira: JiraMark,
+  trello: TrelloMark,
+  notion: NotionMark,
 };
 
 const About = () => {
@@ -34,26 +55,42 @@ const About = () => {
               </p>
             ))}
 
-            {/* Career timeline - a single ruled line with a node per company */}
+            {/* Career timeline - a logo per company, joined by a rule */}
             <div className="mt-10">
               <h3 className="text-sm font-semibold text-accent uppercase tracking-[0.12em] mb-6">{timeline.title}</h3>
-              <ol className="relative list-none p-0 m-0 border-l border-line pl-6 space-y-8 max-[480px]:pl-5">
-                {timeline.items.map((job) => (
-                  <li key={job.company + job.period} className="relative group">
-                    {/* Node sitting on the rule */}
+              <ol className="list-none p-0 m-0 space-y-8">
+                {timeline.items.map((job, i) => (
+                  <li
+                    key={job.company + job.period}
+                    className="group relative flex items-start gap-5 max-[480px]:gap-4"
+                  >
+                    {/* The rule is drawn per item rather than once down the whole
+                        list: it runs from this logo to the next one, so it never
+                        overshoots above the first or below the last. */}
+                    {i < timeline.items.length - 1 && (
+                      <span
+                        aria-hidden="true"
+                        className="absolute left-[1.125rem] top-9 -bottom-8 w-px -translate-x-1/2 bg-line max-[480px]:left-4 max-[480px]:top-8"
+                      />
+                    )}
+
+                    {/* All three marks are drawn for light backgrounds, so they
+                        sit on a white tile rather than straight on the page. */}
                     <span
                       aria-hidden="true"
-                      className="absolute -left-[1.93rem] top-1 flex h-9 w-9 items-center justify-center rounded-xl text-sm font-bold ring-1 transition-transform duration-300 group-hover:scale-105 max-[480px]:-left-[1.68rem] max-[480px]:h-8 max-[480px]:w-8"
-                      style={{
-                        backgroundColor: `${job.color}22`,
-                        color: job.color,
-                        boxShadow: `inset 0 0 0 1px ${job.color}55`,
-                      }}
+                      className="relative z-10 flex h-9 w-9 shrink-0 items-center justify-center overflow-hidden rounded-xl bg-white transition-transform duration-300 group-hover:scale-105 max-[480px]:h-8 max-[480px]:w-8"
                     >
-                      {job.initial}
+                      <img
+                        src={job.logo}
+                        alt=""
+                        width="128"
+                        height="128"
+                        loading="lazy"
+                        className="h-full w-full object-contain"
+                      />
                     </span>
 
-                    <div className="pl-6 max-[480px]:pl-5">
+                    <div className="min-w-0">
                       <div className="flex flex-wrap items-center gap-x-2.5 gap-y-1 mb-0.5">
                         <h4 className="text-base font-semibold text-text">{job.company}</h4>
                         {job.current && (

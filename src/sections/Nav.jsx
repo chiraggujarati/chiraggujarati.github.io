@@ -7,6 +7,20 @@ import { containerClasses } from '../styles';
 // and handleNavClick, which has to wait it out before scrolling.
 const MOBILE_MENU_EXIT_MS = 200;
 
+// Which nav link each section lights up. Only sections with a link of their own
+// belong here - Open source has none, so it is deliberately absent: pointing it
+// back at "Projects" would make that highlight blink off over the testimonials
+// in between and on again below them.
+const SECTION_TO_LINK = {
+  services: 'services',
+  apps: 'apps',
+  testimonials: 'testimonials',
+  about: 'about',
+  articles: 'articles',
+  faq: 'faq',
+  contact: 'contact',
+};
+
 const Nav = ({ articleSlug, onBack, homeUrl = '/' }) => {
   const t = translations;
   const nav = t.nav;
@@ -36,12 +50,12 @@ const Nav = ({ articleSlug, onBack, homeUrl = '/' }) => {
   // Track active section via IntersectionObserver (skip in article mode)
   useEffect(() => {
     if (articleSlug) return;
-    const ids = ['services', 'projects', 'faq', 'about', 'articles', 'contact'];
+    const ids = Object.keys(SECTION_TO_LINK);
     const observer = new IntersectionObserver(
       (entries) => {
         for (const entry of entries) {
           if (entry.isIntersecting) {
-            setActiveSection(entry.target.id);
+            setActiveSection(SECTION_TO_LINK[entry.target.id]);
           }
         }
       },
@@ -56,12 +70,15 @@ const Nav = ({ articleSlug, onBack, homeUrl = '/' }) => {
     return () => observer.disconnect();
   }, [articleSlug]);
 
+  // Listed in the order the page scrolls, so the active link travels along the
+  // bar instead of jumping back and forth.
   const navLinks = [
     { id: 'services', label: nav.services },
-    { id: 'projects', label: nav.projects },
-    { id: 'faq', label: nav.faq },
+    { id: 'apps', label: nav.projects },
+    { id: 'testimonials', label: nav.testimonials },
     { id: 'about', label: nav.about },
     { id: 'articles', label: nav.articles },
+    { id: 'faq', label: nav.faq },
     { id: 'contact', label: nav.contact },
   ];
 
@@ -105,7 +122,11 @@ const Nav = ({ articleSlug, onBack, homeUrl = '/' }) => {
           />
           <span className="flex flex-col min-w-0 leading-tight">
             <span className="text-base font-bold text-text truncate max-[480px]:text-sm">Chirag Gujarati</span>
-            <span className="text-[0.65rem] font-medium uppercase tracking-[0.18em] text-muted truncate max-[600px]:tracking-[0.12em] max-[380px]:hidden">
+            {/* Dropped between md and lg: that is the band where the full link
+                row and the brand are fighting for the same width, and the role
+                is the part that can go. Below md the links collapse into the
+                hamburger, so it comes back. */}
+            <span className="text-[0.65rem] font-medium uppercase tracking-[0.18em] text-muted truncate max-[600px]:tracking-[0.12em] max-[380px]:hidden md:max-lg:hidden">
               Mobile App Developer
             </span>
           </span>
@@ -125,7 +146,7 @@ const Nav = ({ articleSlug, onBack, homeUrl = '/' }) => {
         ) : (
           <>
             {/* Desktop nav */}
-            <nav className="hidden md:flex items-center gap-8" aria-label="Main navigation">
+            <nav className="hidden md:flex items-center gap-5 lg:gap-8" aria-label="Main navigation">
               {navLinks.map(({ id, label }) => (
                 <a
                   key={id}

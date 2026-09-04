@@ -3,10 +3,10 @@ import { sectionClasses } from '../styles';
 import { SectionHeader } from '../components/ui';
 import { ScrollReveal } from '../components/ScrollReveal';
 import Card from '../components/Card';
-import { AppleIcon, BluetoothIcon, FilmIcon, LockIcon } from '../icons';
+import { AppleIcon, BluetoothIcon, HourglassIcon, RedesignIcon } from '../icons';
 import { AndroidMark, AwsMark, DesignMark, FirebaseMark, IOSMark, PythonMark, SupabaseMark } from '../techIcons';
 
-const caseIcons = { bluetooth: BluetoothIcon, lock: LockIcon, film: FilmIcon };
+const caseIcons = { bluetooth: BluetoothIcon, screentime: HourglassIcon, redesign: RedesignIcon };
 
 const techMarks = {
   ios: IOSMark,

@@ -2,19 +2,62 @@ import { motion, useReducedMotion } from 'framer-motion';
 import { translations } from '../i18n';
 import { containerClasses } from '../styles';
 import { Button } from '../components/ui';
-import { AppleIcon, ReactIcon, ServerIcon, SparklesIcon } from '../icons';
+import {
+  GitHubIcon,
+  LinkedInIcon,
+  MailIcon,
+  ServerIcon,
+  SparklesIcon,
+  StackOverflowIcon,
+  UpworkIcon,
+  XIcon,
+} from '../icons';
+import { IOSMark, ReactNativeMark } from '../techIcons';
 
-const eyebrowIcons = { apple: AppleIcon, react: ReactIcon, backend: ServerIcon, ai: SparklesIcon };
+const socialIcons = {
+  mail: MailIcon,
+  linkedin: LinkedInIcon,
+  github: GitHubIcon,
+  upwork: UpworkIcon,
+  x: XIcon,
+  stackoverflow: StackOverflowIcon,
+};
+
+// Here the brand colour is the circle, not the glyph - every mark sits white on
+// its own colour. GitHub and X are near-black, which disappears against this
+// page, so those two get a hairline ring to hold their shape.
+const socialStyles = {
+  mail: 'bg-[#EA4335]',
+  linkedin: 'bg-[#0A66C2]',
+  github: 'bg-[#24292F] ring-1 ring-white/20',
+  upwork: 'bg-[#14A800]',
+  x: 'bg-black ring-1 ring-white/20',
+  stackoverflow: 'bg-[#F48024]',
+};
+
+// iOS and React Native are real brands, so they use the marks that carry their
+// own official colour. Backend and AI agents are concepts with no brand of
+// their own, so they keep a UI glyph and get a colour assigned below.
+const eyebrowIcons = { apple: IOSMark, react: ReactNativeMark, backend: ServerIcon, ai: SparklesIcon };
+
+// Literal class strings - Tailwind only emits class names it can find in the
+// source, so these cannot be built from a variable.
+const eyebrowColors = { backend: 'text-[#34D399]', ai: 'text-[#A78BFA]' };
 
 const Hero = () => {
   const t = translations;
   const { eyebrow, heading, subtitle, proofPoints, cta, alt } = t.hero;
   const prefersReducedMotion = useReducedMotion();
 
+  // Read straight off the contact section rather than copied, so a link only
+  // ever has to change in one place. Email is not in that list - it is the
+  // section's own "email me instead" button - so it is added here.
+  const socials = [{ icon: 'mail', label: 'Email', href: t.contact.secondary.href }, ...t.contact.socials];
+
   return (
     <section
       id="home"
-      className={`${containerClasses} flex gap-12 items-center min-h-[85vh] pt-24 pb-20 border-b border-line max-[1450px]:gap-8 max-[1200px]:flex-col max-[1200px]:text-center max-[1200px]:pt-28 max-[1200px]:gap-10`}
+      className={`${containerClasses} flex gap-12 items-center min-h-[85vh] pt-24 pb-14 md:pb-20 border-b border-line max-[1450px]:gap-8 max-[1200px]:flex-col max-[1200px]:text-center max-[1200px]:pt-28 max-[1200px]:gap-10`}
     >
       <motion.div
         className="flex-1 min-w-0 max-[1450px]:max-w-[640px] max-[1200px]:max-w-none"
@@ -30,7 +73,7 @@ const Hero = () => {
                 key={label}
                 className="inline-flex items-center gap-2 text-accent text-sm font-semibold tracking-[0.1em] max-[480px]:text-xs max-[480px]:gap-1.5"
               >
-                <Icon className="h-[1.15em] w-[1.15em] shrink-0" />
+                <Icon className={`h-[1.15em] w-[1.15em] shrink-0 ${eyebrowColors[icon] ?? ''}`} />
                 {label}
               </li>
             );
@@ -73,6 +116,25 @@ const Hero = () => {
           </Button>
         </div>
         {cta.reassurance && <p className="text-xs text-muted mt-4">{cta.reassurance}</p>}
+
+        <ul className="flex flex-wrap items-center gap-2.5 mt-6 list-none p-0 max-[1200px]:justify-center">
+          {socials.map(({ icon, label, href }) => {
+            const Icon = socialIcons[icon];
+            return (
+              <li key={label}>
+                <a
+                  href={href}
+                  aria-label={label}
+                  title={label}
+                  {...(href.startsWith('http') && { target: '_blank', rel: 'noreferrer' })}
+                  className={`inline-flex h-10 w-10 items-center justify-center rounded-full text-white transition-transform duration-300 hover:scale-110 hover:text-white ${socialStyles[icon] ?? ''}`}
+                >
+                  {Icon && <Icon className="h-[18px] w-[18px]" />}
+                </a>
+              </li>
+            );
+          })}
+        </ul>
       </motion.div>
 
       <motion.div

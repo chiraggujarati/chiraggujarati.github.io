@@ -3,8 +3,9 @@ import { sectionClasses } from '../styles';
 import { SectionHeader } from '../components/ui';
 import { ScrollReveal } from '../components/ScrollReveal';
 import Card from '../components/Card';
+import VideoFacade from '../components/VideoFacade';
 import { StarIcon, VerifiedIcon } from '../icons';
-import { UpworkMark } from '../techIcons';
+import { UpworkMark, YouTubeMark } from '../techIcons';
 
 const QuoteIcon = () => (
   <svg className="w-8 h-8 text-accent/30" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
@@ -22,7 +23,8 @@ const Rating = ({ value }) => (
 
 const Testimonials = () => {
   const t = translations;
-  const { title, subtitle, items, pendingLabel, verifiedLabel, sourceLabel, ctaLabel, ctaHref } = t.testimonials;
+  const { title, subtitle, items, video, pendingLabel, verifiedLabel, sourceLabel, appStoreLabel, ctaLabel, ctaHref } =
+    t.testimonials;
 
   return (
     <section id="testimonials" className={sectionClasses}>
@@ -30,6 +32,56 @@ const Testimonials = () => {
         <SectionHeader title={title} className="mb-4" />
         {subtitle && <p className="text-base text-muted max-w-2xl mb-12">{subtitle}</p>}
       </ScrollReveal>
+
+      {video && (
+        <ScrollReveal>
+          <Card className="mb-6 p-6 md:p-8">
+            <div className="grid grid-cols-1 md:grid-cols-[minmax(0,15rem)_1fr] gap-8 md:gap-10 items-center">
+              <VideoFacade
+                videoId={video.videoId}
+                poster={video.poster}
+                width={video.posterWidth}
+                height={video.posterHeight}
+                title={video.videoTitle}
+                playLabel={video.playLabel}
+                duration={video.duration}
+                className="w-full max-w-[15rem] mx-auto md:mx-0"
+              />
+
+              <div className="max-w-xl">
+                <span className="inline-flex items-center gap-1.5 rounded-full border border-line/70 px-2.5 py-1 text-[0.7rem] font-semibold uppercase tracking-wider text-muted">
+                  <YouTubeMark className="h-3.5 w-3.5" />
+                  {video.label}
+                </span>
+                <h3 className="mt-4 text-xl md:text-2xl font-bold tracking-tight">{video.heading}</h3>
+                <p className="mt-3 text-sm text-muted leading-relaxed">{video.body}</p>
+
+                <div className="mt-6 pt-6 border-t border-line">
+                  <div className="flex flex-wrap items-center gap-x-2 gap-y-1">
+                    <p className="font-semibold text-sm">{video.name}</p>
+                    <span className="inline-flex items-center gap-1 text-[0.7rem] font-semibold text-accent">
+                      <VerifiedIcon className="h-3.5 w-3.5" />
+                      {verifiedLabel}
+                    </span>
+                  </div>
+                  <p className="text-xs text-muted">{video.role}</p>
+                  {video.date && <p className="text-xs text-muted/60 mt-1">{video.date}</p>}
+                </div>
+
+                <a
+                  href={video.watchHref}
+                  target="_blank"
+                  rel="noreferrer"
+                  className="mt-5 inline-flex items-center gap-2 text-sm font-semibold text-muted no-underline transition-colors duration-300 hover:text-accent"
+                >
+                  <YouTubeMark className="h-4 w-4" />
+                  {video.watchLabel}
+                </a>
+              </div>
+            </div>
+          </Card>
+        </ScrollReveal>
+      )}
 
       <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
         {items.map((item, i) => (
@@ -80,6 +132,24 @@ const Testimonials = () => {
                       </span>
                       {item.date && <span className="text-xs text-muted/60">· {item.date}</span>}
                     </div>
+                    {item.appStoreHref && (
+                      <a
+                        href={item.appStoreHref}
+                        target="_blank"
+                        rel="noreferrer"
+                        aria-label={`${item.appStoreApp} - ${appStoreLabel}`}
+                        className="mt-4 inline-block transition-opacity duration-300 hover:opacity-75"
+                      >
+                        <img
+                          src="/app-store-badge.svg"
+                          alt={`${item.appStoreApp} - ${appStoreLabel}`}
+                          width="120"
+                          height="40"
+                          loading="lazy"
+                          className="h-9 w-auto"
+                        />
+                      </a>
+                    )}
                   </div>
                 </>
               )}

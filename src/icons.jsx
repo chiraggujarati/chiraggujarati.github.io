@@ -89,7 +89,9 @@ export function BluetoothIcon({ className = '' }) {
       className={className}
       aria-hidden="true"
     >
-      <path d="m7 7 10 10-5 5V2l5 5L7 17" />
+      <path d="m4 7 10 10-5 5V2l5 5L4 17" />
+      <path d="M17 8.5a5 5 0 0 1 0 7" />
+      <path d="M20 5.5a9 9 0 0 1 0 13" />
     </svg>
   );
 }
@@ -185,7 +187,9 @@ export function StackOverflowIcon({ className = '' }) {
   );
 }
 
-export function LockIcon({ className = '' }) {
+// An hourglass rather than a padlock: Screen Time is about time running out,
+// not about security, and the padlock read as the wrong promise.
+export function HourglassIcon({ className = '' }) {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
@@ -198,14 +202,16 @@ export function LockIcon({ className = '' }) {
       className={className}
       aria-hidden="true"
     >
-      <rect x="3" y="11" width="18" height="11" rx="2" />
-      <path d="M7 11V7a5 5 0 0 1 10 0v4" />
-      <path d="M12 15v3" />
+      <path d="M5 2h14M5 22h14" />
+      <path d="M17 22v-4.2a2 2 0 0 0-.6-1.4L12 12l-4.4 4.4a2 2 0 0 0-.6 1.4V22" />
+      <path d="M7 2v4.2a2 2 0 0 0 .6 1.4L12 12l4.4-4.4a2 2 0 0 0 .6-1.4V2" />
     </svg>
   );
 }
 
-export function FilmIcon({ className = '' }) {
+// A screen with a sparkle inside it - the work was rebuilding an interface,
+// which a film strip did not say at all.
+export function RedesignIcon({ className = '' }) {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
@@ -218,8 +224,9 @@ export function FilmIcon({ className = '' }) {
       className={className}
       aria-hidden="true"
     >
-      <rect x="2" y="3" width="20" height="18" rx="2" />
-      <path d="M7 3v18M17 3v18M2 12h20M2 7.5h5M2 16.5h5M17 7.5h5M17 16.5h5" />
+      <rect x="3" y="3" width="18" height="18" rx="2.5" />
+      <path d="M3 8.5h18" />
+      <path d="M12 11.2 13.05 14.05 15.9 15.1 13.05 16.15 12 19 10.95 16.15 8.1 15.1 10.95 14.05z" />
     </svg>
   );
 }
@@ -368,6 +375,20 @@ export function GaugeIcon({ className = '' }) {
       <path d="M3.5 18a9.5 9.5 0 1 1 17 0" />
       <path d="m14.5 10.5-3 4" />
       <circle cx="12" cy="16" r="1.6" fill="currentColor" stroke="none" />
+    </svg>
+  );
+}
+
+export function PlayIcon({ className = '' }) {
+  return (
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      viewBox="0 0 24 24"
+      fill="currentColor"
+      className={className}
+      aria-hidden="true"
+    >
+      <path d="M8 5.14v13.72a1 1 0 0 0 1.54.84l10.79-6.86a1 1 0 0 0 0-1.68L9.54 4.3A1 1 0 0 0 8 5.14z" />
     </svg>
   );
 }
