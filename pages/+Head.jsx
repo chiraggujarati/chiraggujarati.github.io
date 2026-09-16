@@ -2,7 +2,7 @@ import { usePageContext } from 'vike-react/usePageContext';
 import { pagePath } from '../src/urls.js';
 import { translations } from '../src/i18n.js';
 
-const SITE = 'https://chiraggujarati.github.io';
+const SITE = 'https://chiraggujarati.com';
 
 // Google Analytics 4 measurement ID. Defined once, here — the loader and the
 // init snippet below both read it, so the two can never drift apart.
