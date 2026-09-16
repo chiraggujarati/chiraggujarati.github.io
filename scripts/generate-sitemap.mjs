@@ -4,7 +4,7 @@ import { readdirSync, statSync, writeFileSync } from 'node:fs';
 import { join, relative } from 'node:path';
 import { pagePath } from '../src/urls.js';
 
-const SITE = 'https://chiraggujarati.github.io';
+const SITE = 'https://chiraggujarati.com';
 const DIST = 'dist/client';
 
 function walk(dir) {
