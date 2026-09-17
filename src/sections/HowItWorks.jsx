@@ -11,7 +11,7 @@ const HowItWorks = () => {
     <section id="how-it-works" className={sectionClasses}>
       <ScrollReveal>
         <SectionHeader title={title} className="mb-4" />
-        <p className="text-base text-muted max-w-2xl mb-12">{subtitle}</p>
+        <p className="text-base text-muted max-w-2xl mb-12 text-balance">{subtitle}</p>
       </ScrollReveal>
 
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">

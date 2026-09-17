@@ -30,7 +30,7 @@ const Testimonials = () => {
     <section id="testimonials" className={sectionClasses}>
       <ScrollReveal>
         <SectionHeader title={title} className="mb-4" />
-        {subtitle && <p className="text-base text-muted max-w-2xl mb-12">{subtitle}</p>}
+        {subtitle && <p className="text-base text-muted max-w-2xl mb-12 text-balance">{subtitle}</p>}
       </ScrollReveal>
 
       {video && (

@@ -69,7 +69,7 @@ const Projects = () => {
     <section id="projects" className={sectionClasses}>
       <ScrollReveal>
         <SectionHeader title={title} className="mb-4" />
-        {subtitle && <p className="text-base text-muted max-w-2xl mb-12">{subtitle}</p>}
+        {subtitle && <p className="text-base text-muted max-w-2xl mb-12 text-balance">{subtitle}</p>}
       </ScrollReveal>
 
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">

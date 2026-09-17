@@ -7,6 +7,15 @@ import { MediumIcon, LinkedInIcon } from '../icons';
 
 const sourceIcons = { medium: MediumIcon, linkedin: LinkedInIcon };
 
+// Each source's mark keeps its own brand colour. Medium's is black, which would
+// disappear against this page, so it takes the white version Medium specifies
+// for dark backgrounds; LinkedIn's blue is the same one the hero's social row
+// uses.
+//
+// Literal class strings - Tailwind only emits class names it can find in the
+// source, so these cannot be built from a variable.
+const sourceColors = { medium: 'text-white', linkedin: 'text-[#0A66C2]' };
+
 const Articles = () => {
   const t = translations;
   const { title, subtitle, comingSoon, readLabel, items } = t.articles;
@@ -15,7 +24,7 @@ const Articles = () => {
     <section id="articles" className={sectionClasses}>
       <ScrollReveal>
         <SectionHeader title={title} className="mb-4" />
-        {subtitle && <p className="text-base text-muted max-w-2xl mb-12">{subtitle}</p>}
+        {subtitle && <p className="text-base text-muted max-w-2xl mb-12 text-balance">{subtitle}</p>}
       </ScrollReveal>
 
       <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
@@ -32,7 +41,7 @@ const Articles = () => {
               <div className="flex items-center gap-2 mb-4 text-xs text-muted">
                 {SourceIcon && (
                   <span className="inline-flex items-center gap-1.5 rounded-full border border-line/70 bg-white/[0.03] px-2.5 py-1 font-medium transition-colors duration-300 group-hover:border-accent/30 group-hover:text-accent">
-                    <SourceIcon className="h-[1.05em] w-[1.05em] shrink-0" />
+                    <SourceIcon className={`h-[1.05em] w-[1.05em] shrink-0 ${sourceColors[article.source] ?? ''}`} />
                     {article.sourceLabel}
                   </span>
                 )}

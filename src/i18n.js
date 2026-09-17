@@ -8,8 +8,13 @@ export const translations = {
     ],
     heading: ['Your app deserves better', 'than a wrapped website.'],
     subtitle:
-      'Native iOS. Cross-platform React Native. AI agents built in. I take apps from an empty project to a live App Store listing.',
-    proofPoints: ['5+ years in mobile', '30+ apps on the App Store', 'Replies within 24 h'],
+      'Native iOS. Cross-platform React Native. AI agents built in. I take apps from an empty project to a live listing on the App Store and Google Play - work that has passed 1M+ downloads.',
+    proofPoints: [
+      '5+ years in mobile',
+      '30+ apps on the App Store & Google Play',
+      '1M+ downloads shipped',
+      'Replies within 12 h',
+    ],
     alt: 'Chirag Gujarati iOS and React Native developer',
     cta: {
       primary: {
@@ -67,7 +72,7 @@ export const translations = {
     },
     stats: [
       { value: '5+', label: 'Years building mobile apps' },
-      { value: '30+', label: 'Apps shipped to the App Store' },
+      { value: '30+', label: 'Apps shipped to the App Store & Google Play' },
       { value: 'iOS + React Native', label: 'Native and cross-platform' },
     ],
     toolbox: {
@@ -293,20 +298,36 @@ export const translations = {
         appStore: 'https://apps.apple.com/us/app/pdf-scanner-document-camera/id6654918235',
       },
       {
-        name: 'DAMAGE iD',
-        icon: '/app-damage-id.webp',
-        category: 'Business',
-        description:
-          'Photo and video vehicle inspection for rental fleets - damage recorded and proven before and after every trip.',
-        appStore: 'https://apps.apple.com/us/app/damage-id/id1024284443',
-      },
-      {
         name: 'Skandika Fitness',
         icon: '/app-skandika.webp',
         category: 'Health & Fitness',
         description:
           'Bluetooth companion for Skandika ergometers - live workout metrics and guided sessions, in six languages.',
         appStore: 'https://apps.apple.com/de/app/skandika-fitness/id6473820107',
+      },
+      {
+        name: 'Biology: 39 Year Past Papers',
+        icon: '/app-neet-biology.webp',
+        category: 'Education',
+        description:
+          'Thirty-nine years of NEET biology papers, chapter-wise, with mock tests, short notes and weak-chapter analysis. Past 1M downloads.',
+        googlePlay: 'https://play.google.com/store/apps/details?id=com.rktech.mtgneetbiology',
+      },
+      {
+        name: 'Chemistry: 39 Year NEET Papers',
+        icon: '/app-neet-chemistry.webp',
+        category: 'Education',
+        description:
+          'The chemistry companion - solved NEET papers, speed tests, a mistake book and a weakness heatmap, all usable offline.',
+        googlePlay: 'https://play.google.com/store/apps/details?id=com.rktech.mtgneetchemistry',
+      },
+      {
+        name: 'DAMAGE iD',
+        icon: '/app-damage-id.webp',
+        category: 'Business',
+        description:
+          'Photo and video vehicle inspection for rental fleets - damage recorded and proven before and after every trip.',
+        appStore: 'https://apps.apple.com/us/app/damage-id/id1024284443',
       },
       {
         name: 'AviMaps',
@@ -322,6 +343,15 @@ export const translations = {
         category: 'Health & Fitness',
         description: 'Bedtime stories, meditations and sleep sounds that help children settle and fall asleep faster.',
         appStore: 'https://apps.apple.com/us/app/dreamtime-stories-sounds/id6504247314',
+      },
+      {
+        name: 'Fig: AI Live Video Chat',
+        icon: '/app-fig.webp',
+        category: 'Communication',
+        description:
+          'One-tap random video chat with strangers worldwide - AI matching, and gestures the camera reads off your face mid-call.',
+        appStore: 'https://apps.apple.com/us/app/fig-ai-videochat/ios-6744099349',
+        googlePlay: 'https://play.google.com/store/apps/details?id=com.figvideo.videochat',
       },
     ],
   },
@@ -497,7 +527,7 @@ export const translations = {
     ],
   },
   articles: {
-    title: 'Writing',
+    title: 'Articles',
     subtitle: 'Notes from day-to-day iOS work - the settings, pipelines and skills that actually move a project along.',
     comingSoon: 'Coming soon',
     readLabel: 'Read',

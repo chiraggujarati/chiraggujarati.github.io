@@ -3,10 +3,16 @@ import { sectionClasses } from '../styles';
 import { SectionHeader } from '../components/ui';
 import { ScrollReveal } from '../components/ScrollReveal';
 import Card from '../components/Card';
-import { AppleIcon, BluetoothIcon, HourglassIcon, RedesignIcon } from '../icons';
+import { AppleIcon } from '../icons';
 import { AndroidMark, AwsMark, DesignMark, FirebaseMark, IOSMark, PythonMark, SupabaseMark } from '../techIcons';
 
-const caseIcons = { bluetooth: BluetoothIcon, screentime: HourglassIcon, redesign: RedesignIcon };
+// Artwork, not glyphs: each file is already a rounded tile with its own colour
+// baked in, so the markup below only sizes it.
+const caseIcons = {
+  bluetooth: '/case-bluetooth.webp',
+  screentime: '/case-screentime.webp',
+  redesign: '/case-redesign.webp',
+};
 
 const techMarks = {
   ios: IOSMark,
@@ -26,12 +32,12 @@ const ProofBand = () => {
     <section id="proof" className={sectionClasses}>
       <ScrollReveal>
         <SectionHeader title={title} className="mb-4" />
-        <p className="text-base text-muted max-w-2xl mb-12">{subtitle}</p>
+        <p className="text-base text-muted max-w-2xl mb-12 text-balance">{subtitle}</p>
       </ScrollReveal>
 
       <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
         {cases.map((c, i) => {
-          const Icon = caseIcons[c.icon];
+          const iconSrc = caseIcons[c.icon];
           return (
             <ScrollReveal key={c.client} delay={i * 0.1}>
               <Card className="group relative overflow-hidden p-7 h-full flex flex-col hover:border-accent/40 hover:-translate-y-1 hover:shadow-[0_18px_50px_-12px_rgba(0,0,0,0.65)]">
@@ -47,10 +53,17 @@ const ProofBand = () => {
                 />
                 {/* Icon and numeral share a row, so neither can collide with the tag. */}
                 <div className="relative flex items-center justify-between mb-4">
-                  {Icon && (
-                    <span className="inline-flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-accent/10 text-accent ring-1 ring-accent/25 transition-colors duration-300 group-hover:bg-accent/20 group-hover:ring-accent/45">
-                      <Icon className="h-5 w-5" />
-                    </span>
+                  {iconSrc && (
+                    // 25% is the corner radius baked into the artwork, so the
+                    // ring traces the tile's own edge instead of cutting it.
+                    <img
+                      src={iconSrc}
+                      alt=""
+                      width="128"
+                      height="128"
+                      loading="lazy"
+                      className="h-11 w-11 shrink-0 rounded-[25%] ring-1 ring-line transition-colors duration-300 group-hover:ring-accent/45"
+                    />
                   )}
                   <span
                     aria-hidden="true"

@@ -76,26 +76,6 @@ export function SparklesIcon({ className = '' }) {
   );
 }
 
-export function BluetoothIcon({ className = '' }) {
-  return (
-    <svg
-      xmlns="http://www.w3.org/2000/svg"
-      viewBox="0 0 24 24"
-      fill="none"
-      stroke="currentColor"
-      strokeWidth="2"
-      strokeLinecap="round"
-      strokeLinejoin="round"
-      className={className}
-      aria-hidden="true"
-    >
-      <path d="m4 7 10 10-5 5V2l5 5L4 17" />
-      <path d="M17 8.5a5 5 0 0 1 0 7" />
-      <path d="M20 5.5a9 9 0 0 1 0 13" />
-    </svg>
-  );
-}
-
 // Brand marks below are the official single-path glyphs, drawn on a 24x24 grid
 // and filled with currentColor so they inherit link colour and hover states.
 export function MailIcon({ className = '' }) {
@@ -187,50 +167,6 @@ export function StackOverflowIcon({ className = '' }) {
   );
 }
 
-// An hourglass rather than a padlock: Screen Time is about time running out,
-// not about security, and the padlock read as the wrong promise.
-export function HourglassIcon({ className = '' }) {
-  return (
-    <svg
-      xmlns="http://www.w3.org/2000/svg"
-      viewBox="0 0 24 24"
-      fill="none"
-      stroke="currentColor"
-      strokeWidth="2"
-      strokeLinecap="round"
-      strokeLinejoin="round"
-      className={className}
-      aria-hidden="true"
-    >
-      <path d="M5 2h14M5 22h14" />
-      <path d="M17 22v-4.2a2 2 0 0 0-.6-1.4L12 12l-4.4 4.4a2 2 0 0 0-.6 1.4V22" />
-      <path d="M7 2v4.2a2 2 0 0 0 .6 1.4L12 12l4.4-4.4a2 2 0 0 0 .6-1.4V2" />
-    </svg>
-  );
-}
-
-// A screen with a sparkle inside it - the work was rebuilding an interface,
-// which a film strip did not say at all.
-export function RedesignIcon({ className = '' }) {
-  return (
-    <svg
-      xmlns="http://www.w3.org/2000/svg"
-      viewBox="0 0 24 24"
-      fill="none"
-      stroke="currentColor"
-      strokeWidth="2"
-      strokeLinecap="round"
-      strokeLinejoin="round"
-      className={className}
-      aria-hidden="true"
-    >
-      <rect x="3" y="3" width="18" height="18" rx="2.5" />
-      <path d="M3 8.5h18" />
-      <path d="M12 11.2 13.05 14.05 15.9 15.1 13.05 16.15 12 19 10.95 16.15 8.1 15.1 10.95 14.05z" />
-    </svg>
-  );
-}
-
 export function MediumIcon({ className = '' }) {
   return (
     <svg
@@ -274,107 +210,6 @@ export function VerifiedIcon({ className = '' }) {
     >
       <circle cx="12" cy="12" r="10" strokeWidth="2" />
       <path d="m8 12 2.5 2.5L16 9" />
-    </svg>
-  );
-}
-
-export function SmartphoneIcon({ className = '' }) {
-  return (
-    <svg
-      xmlns="http://www.w3.org/2000/svg"
-      viewBox="0 0 24 24"
-      fill="none"
-      stroke="currentColor"
-      strokeWidth="2"
-      strokeLinecap="round"
-      strokeLinejoin="round"
-      className={className}
-      aria-hidden="true"
-    >
-      <rect x="5" y="2" width="14" height="20" rx="2.5" />
-      <path d="M10 5.5h4" />
-      <path d="M11 18.5h2" />
-    </svg>
-  );
-}
-
-export function ChecklistIcon({ className = '' }) {
-  return (
-    <svg
-      xmlns="http://www.w3.org/2000/svg"
-      viewBox="0 0 24 24"
-      fill="none"
-      stroke="currentColor"
-      strokeWidth="2"
-      strokeLinecap="round"
-      strokeLinejoin="round"
-      className={className}
-      aria-hidden="true"
-    >
-      <path d="M9 3h6a1 1 0 0 1 1 1v1a1 1 0 0 1-1 1H9a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1Z" />
-      <path d="M16 4.5h2A2 2 0 0 1 20 6.5V20a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6.5a2 2 0 0 1 2-2h2" />
-      <path d="m8.5 12.5 1.75 1.75L14 10.5" />
-      <path d="M8.5 18h7" />
-    </svg>
-  );
-}
-
-export function WrenchIcon({ className = '' }) {
-  return (
-    <svg
-      xmlns="http://www.w3.org/2000/svg"
-      viewBox="0 0 24 24"
-      fill="none"
-      stroke="currentColor"
-      strokeWidth="2"
-      strokeLinecap="round"
-      strokeLinejoin="round"
-      className={className}
-      aria-hidden="true"
-    >
-      <path d="M14.7 6.3a4.5 4.5 0 0 0 5.9 5.9l-8.4 8.4a2.4 2.4 0 0 1-3.4-3.4Z" />
-      <path d="M14.7 6.3 17.5 3.5a4.5 4.5 0 0 1 3 7.7" />
-    </svg>
-  );
-}
-
-export function RocketIcon({ className = '' }) {
-  return (
-    <svg
-      xmlns="http://www.w3.org/2000/svg"
-      viewBox="0 0 24 24"
-      fill="none"
-      stroke="currentColor"
-      strokeWidth="2"
-      strokeLinecap="round"
-      strokeLinejoin="round"
-      className={className}
-      aria-hidden="true"
-    >
-      <path d="M4.5 16.5c-1.5 1-2 5-2 5s4-.5 5-2c.6-.9.5-2.2-.4-3a2.1 2.1 0 0 0-2.6 0Z" />
-      <path d="M12 15 9 12a12 12 0 0 1 3-7c1.7-1.7 4-2.6 6.5-2.5C18.6 5 17.7 7.3 16 9a12 12 0 0 1-4 6Z" />
-      <path d="M9 12H5s.4-2.3 1.5-3.2C7.7 7.8 9 8 9 8" />
-      <path d="M12 15v4s2.3-.4 3.2-1.5c1-1.2.8-2.5.8-2.5" />
-    </svg>
-  );
-}
-
-export function GaugeIcon({ className = '' }) {
-  return (
-    <svg
-      xmlns="http://www.w3.org/2000/svg"
-      viewBox="0 0 24 24"
-      fill="none"
-      stroke="currentColor"
-      strokeWidth="2"
-      strokeLinecap="round"
-      strokeLinejoin="round"
-      className={className}
-      aria-hidden="true"
-    >
-      <path d="M3.5 18a9.5 9.5 0 1 1 17 0" />
-      <path d="m14.5 10.5-3 4" />
-      <circle cx="12" cy="16" r="1.6" fill="currentColor" stroke="none" />
     </svg>
   );
 }
