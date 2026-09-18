@@ -4,12 +4,47 @@ import { translations } from '../src/i18n.js';
 
 const SITE = 'https://chiraggujarati.com';
 
-// Google Analytics 4 measurement ID. Defined once, here — the loader and the
-// init snippet below both read it, so the two can never drift apart.
 const GA_ID = 'G-CFWXGNHYN3';
 
+const PERSON_ID = `${SITE}/#chirag`;
+const BUSINESS_ID = `${SITE}/#business`;
+
+const ADDRESS = {
+  '@type': 'PostalAddress',
+  addressLocality: 'Ahmedabad',
+  addressRegion: 'Gujarat',
+  addressCountry: 'IN',
+};
+
+const SAME_AS = [
+  'https://www.linkedin.com/in/chirag-gujarati-5520751ab',
+  'https://github.com/chiraggujarati',
+  'https://www.upwork.com/freelancers/~017b8533e11d1e6002?mp_source=share',
+  'https://x.com/ChiragGujarati4',
+  'https://stackoverflow.com/users/14504695/chirag-gujarati',
+];
+
+const KNOWS_ABOUT = [
+  'iOS app development',
+  'Swift',
+  'SwiftUI',
+  'UIKit',
+  'React Native',
+  'Mobile app development',
+  'App Store Connect',
+  'CoreBluetooth',
+  'HealthKit',
+  'ScreenTime API',
+  'Firebase',
+  'Supabase',
+  'WebRTC',
+  'Python',
+  'AI agents',
+  'CI/CD',
+];
+
 const OG_DESCRIPTION =
-  'Design, automate, evolve. I help businesses structure their operations and launch their ideas - from initial scoping to production.';
+  'Native iOS and React Native developer in Ahmedabad. 30+ apps on the App Store & Google Play, 1M+ downloads - from scoping to a live listing.';
 
 export default function Head() {
   const pageContext = usePageContext();
@@ -18,14 +53,9 @@ export default function Head() {
   const canonical = `${SITE}${path}`;
   const title = 'Chirag Gujarati - Mobile App Developer | CG';
   const description = OG_DESCRIPTION;
-  // The error page is pre-rendered as a single /404.html served on any unknown
-  // URL, so a canonical pointing at /404 would advertise a page that doesn't
-  // exist. It must stay out of the index entirely.
   const isErrorPage =
     pageContext.is404 === true || pageContext.abortStatusCode !== undefined || path.replace(/\/$/, '') === '/404';
-  // The video review only lives on the home page, so its VideoObject markup
-  // belongs there too - repeating it on every page would advertise a video the
-  // rest of the site does not carry.
+   
   const video = translations.testimonials.video;
   const showVideoSchema = !isErrorPage && path === '/';
 
@@ -81,44 +111,69 @@ export default function Head() {
         dangerouslySetInnerHTML={{
           __html: JSON.stringify({
             '@context': 'https://schema.org',
-            '@type': 'Organization',
-            name: 'Chirag Gujarati - Mobile App Developer',
-            alternateName: 'CG',
-            email: 'mailto:chiraggj6353@gmail.com',
-            url: SITE,
-            logo: `${SITE}/icon-512.png`,
-            image: `${SITE}/share-card.jpg`,
-            description:
-              'I design, automate and evolve custom web applications for businesses that want to save time, structure their operations or launch a new product.',
-            founder: {
-              '@type': 'Person',
-              name: 'Chirag Gujarati',
-              jobTitle: 'Full-stack Developer',
-              knowsLanguage: ['en'],
-            },
-            address: { '@type': 'PostalAddress', addressRegion: 'QC', addressCountry: 'CA' },
-            areaServed: { '@type': 'Country', name: 'Canada' },
-            sameAs: [
-              'https://www.linkedin.com/in/chirag-gujarati-5520751ab',
-              'https://github.com/chiraggujarati',
-              'https://www.upwork.com/freelancers/~017b8533e11d1e6002?mp_source=share',
-              'https://x.com/ChiragGujarati4',
-              'https://stackoverflow.com/users/14504695/chirag-gujarati',
-            ],
-            knowsAbout: [
-              'React',
-              'Python',
-              'Node.js',
-              'SaaS',
-              'API',
-              'Vite',
-              'Tailwind CSS',
-              'JavaScript',
-              'Automation',
-              'Docker',
-              'Linux',
-              'Cloud',
-              'DevOps',
+             '@graph': [
+              {
+                '@type': 'Person',
+                '@id': PERSON_ID,
+                name: 'Chirag Gujarati',
+                alternateName: 'CG',
+                url: SITE,
+                mainEntityOfPage: SITE,
+                image: `${SITE}/share-card.jpg`,
+                email: 'mailto:chiraggj6353@gmail.com',
+                jobTitle: 'iOS & React Native Developer',
+                description:
+                  'iOS and React Native developer from Ahmedabad, India. I take mobile apps from an empty project to a live App Store and Google Play listing - work that has passed 1M+ downloads.',
+                address: ADDRESS,
+                nationality: { '@type': 'Country', name: 'India' },
+                alumniOf: {
+                  '@type': 'CollegeOrUniversity',
+                  name: 'Sarvajanik College of Engineering and Technology',
+                  address: {
+                    '@type': 'PostalAddress',
+                    addressLocality: 'Surat',
+                    addressRegion: 'Gujarat',
+                    addressCountry: 'IN',
+                  },
+                },
+                knowsLanguage: ['en', 'hi', 'gu'],
+                knowsAbout: KNOWS_ABOUT,
+                worksFor: { '@id': BUSINESS_ID },
+                sameAs: SAME_AS,
+              },
+              {
+                '@type': 'Organization',
+                '@id': BUSINESS_ID,
+                name: 'Chirag Gujarati - Mobile App Developer',
+                alternateName: 'CG',
+                url: SITE,
+                logo: `${SITE}/icon-512.png`,
+                image: `${SITE}/share-card.jpg`,
+                email: 'mailto:chiraggj6353@gmail.com',
+                description:
+                  'Native iOS and cross-platform React Native development for companies shipping mobile products - scoping, build, App Store and Google Play release, and the follow-up versions.',
+                founder: { '@id': PERSON_ID },
+                // No street address and no walk-in trade, so this stays a plain
+                // Organization: LocalBusiness would claim a storefront that
+                // does not exist. The address is here only to place the entity.
+                address: ADDRESS,
+                // Ahmedabad-based, remote worldwide - both are true and both
+                // are worth saying, because they answer different queries.
+                areaServed: [
+                  { '@type': 'Country', name: 'India' },
+                  { '@type': 'Place', name: 'Worldwide' },
+                ],
+                sameAs: SAME_AS,
+              },
+              {
+                '@type': 'WebSite',
+                '@id': `${SITE}/#website`,
+                url: SITE,
+                name: 'Chirag Gujarati',
+                inLanguage: 'en',
+                about: { '@id': PERSON_ID },
+                publisher: { '@id': BUSINESS_ID },
+              },
             ],
           }),
         }}

@@ -1,6 +1,7 @@
 import Nav from '../src/sections/Nav.jsx';
 import Footer from '../src/sections/Footer.jsx';
 import CanvasCursor from '../src/components/CanvasCursor.jsx';
+import ChatWidget from '../src/components/ChatWidget.jsx';
 import { translations } from '../src/i18n.js';
 import '../index.css';
 
@@ -26,6 +27,7 @@ export default function Layout({ children }) {
         </main>
         <Footer />
       </div>
+      <ChatWidget />
     </>
   );
 }
